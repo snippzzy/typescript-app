@@ -1,0 +1,19 @@
+### Keyfiles
+*.key
+
+### osx
+.DS_STORE
+.DS_Store
+
+### Idea
+.idea
+*.iml
+*.ipr
+*.iws
+
+### VSCode
+*.todo
+
+### Build files
+node_modules
+dist
