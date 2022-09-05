@@ -54,6 +54,7 @@ jobs:
       - run:
           name: Building Docker Image
           command: |
+            apt update -y
             apt install docker -y
             docker build -t assessment:latest .
             
