@@ -54,8 +54,8 @@ jobs:
       - run:
           name: Building Docker Image
           command: |
-          sudo apt install docker -y
-          docker build -t assessment:latest .
+            sudo apt install docker -y
+            docker build -t assessment:latest .
             
 workflows:
   default:
