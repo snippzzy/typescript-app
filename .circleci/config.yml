@@ -48,12 +48,14 @@ jobs:
 
   Build-artifact:
     docker:
-      - image: circleci/node:13.8.0
+      - image: ubuntu
     steps:
       - checkout
       - run:
           name: Building Docker Image
-          command: docker build -t assessment:latest .
+          command: |
+          sudo apt install docker -y
+          docker build -t assessment:latest .
             
 workflows:
   default:
