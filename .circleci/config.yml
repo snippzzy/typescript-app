@@ -54,7 +54,7 @@ jobs:
       - run:
           name: Building Docker Image
           command: |
-            yarn install docker
+            npm install docker
             docker build -t assessment:latest .
             
 workflows:
