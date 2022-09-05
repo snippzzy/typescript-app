@@ -54,8 +54,7 @@ jobs:
       - run:
           name: Building Docker Image
           command: |
-            npm install docker
-            npm audit fix --audit-level=critical
+            yarn add docker
             docker build -t assessment:latest .
             
 workflows:
