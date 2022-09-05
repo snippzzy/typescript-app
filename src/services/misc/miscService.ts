@@ -22,6 +22,6 @@ export const getJoke = async (): Promise<string> => {
     throw new ClientError('Failed to fetch joke', 500)
   }
 
-  const body = await response.json() as JokeResponse
+  const body = (await response.json()) as JokeResponse
   return body.joke
 }

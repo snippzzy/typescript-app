@@ -4,14 +4,11 @@ FROM node:16.15.0 as builder
 WORKDIR /usr/src/app
 
 # Install app dependencies
-COPY package*.json ./
-COPY tsconfig*.json ./
+COPY . .
 
 
 RUN yarn install --production[=true]
-
-# Bundle app source
-COPY . .
+RUN yarn run build
 
 # This is the stage two, where the app runs
 FROM node:16.15.0

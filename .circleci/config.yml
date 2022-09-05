@@ -1,0 +1,66 @@
+version: 2.1
+
+
+jobs:
+  Compilation:
+    docker:
+      - image: cimg/node:16.15.1
+    steps:
+      - checkout
+      - run:
+          name: Typescript Compilation
+          command: | 
+            yarn install
+            yarn run build
+      
+  Prettier-Check:
+    docker:
+      - image: cimg/node:16.15.1
+    steps:
+      - checkout
+      - run:
+          name: Formating Code
+          command: |
+            yarn install
+            yarn run prettier-check
+
+  Linting:
+    docker:
+      - image: cimg/node:16.15.1
+    steps:
+      - checkout
+      - run:
+          name: Linting the Code
+          command: |
+            yarn install
+            yarn run lint        
+
+  Testing:
+    docker:
+      - image: cimg/node:16.15.1
+    steps:
+      - checkout
+      - run:
+          name: Testing Code
+          command: |
+            yarn install
+            yarn run test
+
+  Build-artifact:
+    docker:
+      - image: cimg/node:16.15.1
+    steps:
+      - checkout
+      - run:
+          name: Building Docker Image
+          command: |
+            docker build -t assessment:latest .
+            
+workflows:
+  default:
+    jobs:
+      - Compilation
+      - Prettier-Check
+      - Linting
+      - Testing
+      - Build-artifact
