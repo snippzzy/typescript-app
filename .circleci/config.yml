@@ -51,6 +51,8 @@ jobs:
       - image: cimg/node:18.3.0
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.14
       - run:
           name: Building Docker Image
           command: docker build -t assessment:latest .
