@@ -48,7 +48,7 @@ jobs:
 
   Build-artifact:
     docker:
-      - image: cimg/node:18.4.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
