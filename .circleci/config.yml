@@ -48,14 +48,12 @@ jobs:
 
   Build-artifact:
     docker:
-      - image: node:16.15.0
+      - image: cimg/node:18.4.0
     steps:
       - checkout
       - run:
           name: Building Docker Image
-          command: |
-            yarn add docker
-            docker build -t assessment:latest .
+          command: docker build -t assessment:latest .
             
 workflows:
   default:
