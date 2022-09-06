@@ -36,7 +36,7 @@ stages:
     
     - task: DockerInstaller@0
       inputs:
-        dockerVersion: '16.15.0-ce'
+        dockerVersion: '17.09.0-ce'
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
@@ -45,6 +45,7 @@ stages:
         targetType: 'inline'
         script: |
           echo 'Running yarn build command'
+          nvm install 16.15.0
           yarn run build
       
   - job: PrettierCheck
@@ -54,7 +55,7 @@ stages:
     steps:
     - task: DockerInstaller@0
       inputs:
-        dockerVersion: '16.15.0-ce'
+        dockerVersion: '17.09.0-ce'
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
@@ -63,6 +64,7 @@ stages:
         targetType: 'inline'
         script: |
           echo 'Running yarn prettier-check command'
+          nvm install 16.15.0
           yarn run prettier-check
   
   - job: Linting
@@ -72,7 +74,7 @@ stages:
     steps:
     - task: DockerInstaller@0
       inputs:
-        dockerVersion: '16.15.0-ce'
+        dockerVersion: '17.09.0-ce'
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
@@ -81,6 +83,7 @@ stages:
         targetType: 'inline'
         script: |
           echo 'Running yarn lint command'
+          nvm install 16.15.0
           yarn run lint
       
   - job: Testing
@@ -90,7 +93,7 @@ stages:
     steps:
     - task: DockerInstaller@0
       inputs:
-        dockerVersion: '16.15.0-ce'
+        dockerVersion: '17.09.0-ce'
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
@@ -99,5 +102,6 @@ stages:
         targetType: 'inline'
         script: |
           echo 'Running yarn test command'
+          nvm install 16.15.0
           yarn run test
       continueOnError: yes
