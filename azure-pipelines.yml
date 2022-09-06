@@ -42,7 +42,9 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: 'yarn run build'
+        script: |
+          echo 'Running yarn build command'
+          yarn run build
 
   - job: PrettierCheck
     displayName: PrettierCheck
@@ -58,7 +60,9 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: 'yarn run prettier-check'
+        script: |
+          echo 'Running yarn prettier-check command'
+          yarn run prettier-check
   
   - job: Linting
     displayName: Linting
@@ -74,8 +78,10 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: 'yarn run lint'
-  
+        script: |
+          echo 'Running yarn lint command'
+          yarn run lint
+      
   - job: Testing
     displayName: Testing
     pool:
@@ -90,5 +96,7 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: 'yarn run test'
+        script: |
+          echo 'Running yarn test command'
+          yarn run test
       continueOnError: yes
