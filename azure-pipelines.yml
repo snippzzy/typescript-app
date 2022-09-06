@@ -27,3 +27,53 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+
+  - job: Compilation
+    displayName: Compilation
+    pool:
+      image: node:16.15.0
+    steps:
+    - task: YarnInstaller@3
+      inputs:
+        versionSpec: '1.22.19'
+    - task: Yarn@3
+      inputs:
+        arguments: 'yarn run build'
+
+  - job: Prettier-Check
+    displayName: Prettier-Check
+    pool:
+      image: node:16.15.0
+    steps:
+    - task: YarnInstaller@3
+      inputs:
+        versionSpec: '1.22.19'
+    - task: Yarn@3
+      inputs:
+        arguments: 'yarn run prettier-check'
+  
+  - job: Linting
+    displayName: Linting
+    pool:
+      image: node:16.15.0
+    steps:
+    - task: YarnInstaller@3
+      inputs:
+        versionSpec: '1.22.19'
+    - task: Yarn@3
+      inputs:
+        arguments: 'yarn run lint'
+  
+  - job: Testing
+    displayName: Testing
+    pool:
+      image: node:16.15.0
+    steps:
+    - task: YarnInstaller@3
+      inputs:
+        versionSpec: '1.22.19'
+    - task: Yarn@3
+      inputs:
+        arguments: 'yarn run test'
+      timeoutInMinutes: 3
+      continueOnError: yes
