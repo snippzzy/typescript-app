@@ -31,8 +31,11 @@ stages:
   - job: Compilation
     displayName: Compilation
     pool:
-      image: node:16.15.0
+      VmImage: ubuntu-latest
     steps:
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '17.09.0-ce'
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
@@ -43,8 +46,11 @@ stages:
   - job: PrettierCheck
     displayName: PrettierCheck
     pool:
-      image: node:16.15.0
+      VmImage: ubuntu-latest
     steps:
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '17.09.0-ce'
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
@@ -55,8 +61,11 @@ stages:
   - job: Linting
     displayName: Linting
     pool:
-      image: node:16.15.0
+      VmImage: ubuntu-latest
     steps:
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '17.09.0-ce'
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
@@ -67,8 +76,11 @@ stages:
   - job: Testing
     displayName: Testing
     pool:
-      image: node:16.15.0
+      VmImage: ubuntu-latest
     steps:
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '17.09.0-ce'
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
