@@ -64,10 +64,6 @@ stages:
         targetType: 'inline'
         script: |
           echo 'Running yarn prettier-check command'
-          sudo apt install curl 
-          curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
-          source ~/.bashrc
-          nvm install 16.15.0
           yarn run prettier-check
   
   - job: Linting
@@ -86,10 +82,6 @@ stages:
         targetType: 'inline'
         script: |
           echo 'Running yarn lint command'
-          sudo apt install curl 
-          curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
-          source ~/.bashrc
-          nvm install 16.15.0
           yarn run lint
       
   - job: Testing
@@ -108,9 +100,5 @@ stages:
         targetType: 'inline'
         script: |
           echo 'Running yarn test command'
-          sudo apt install curl 
-          curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
-          source ~/.bashrc
-          nvm install 16.15.0
           yarn run test
       continueOnError: yes
