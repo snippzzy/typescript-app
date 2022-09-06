@@ -39,9 +39,10 @@ stages:
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
-    - task: Yarn@3
+    - task: Bash@3
       inputs:
-        arguments: 'yarn run build'
+        targetType: 'inline'
+        script: 'yarn run build'
 
   - job: PrettierCheck
     displayName: PrettierCheck
@@ -54,9 +55,10 @@ stages:
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
-    - task: Yarn@3
+    - task: Bash@3
       inputs:
-        arguments: 'yarn run prettier-check'
+        targetType: 'inline'
+        script: 'yarn run prettier-check'
   
   - job: Linting
     displayName: Linting
@@ -69,9 +71,10 @@ stages:
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
-    - task: Yarn@3
+    - task: Bash@3
       inputs:
-        arguments: 'yarn run lint'
+        targetType: 'inline'
+        script: 'yarn run lint'
   
   - job: Testing
     displayName: Testing
@@ -84,8 +87,8 @@ stages:
     - task: YarnInstaller@3
       inputs:
         versionSpec: '1.22.19'
-    - task: Yarn@3
+    - task: Bash@3
       inputs:
-        arguments: 'yarn run test'
-      timeoutInMinutes: 3
+        targetType: 'inline'
+        script: 'yarn run test'
       continueOnError: yes
