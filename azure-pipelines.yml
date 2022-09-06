@@ -40,8 +40,8 @@ stages:
       inputs:
         arguments: 'yarn run build'
 
-  - job: Prettier-Check
-    displayName: Prettier Check
+  - job: PrettierCheck
+    displayName: PrettierCheck
     pool:
       image: node:16.15.0
     steps:
