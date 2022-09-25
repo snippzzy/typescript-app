@@ -64,6 +64,6 @@ workflows:
       - Prettier-Check
       - Linting
       - Testing
-      - Build-artifact 
-        #  requires: [ Testing, Linting, Prettier-Check, Compilation ]
+      - Build-artifact: 
+          requires: [ Testing, Linting, Prettier-Check, Compilation ]
 
