@@ -1,0 +1,104 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        command: build
+        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        tags: |
+          $(tag)
+
+  - job: Compilation
+    displayName: Compilation
+    pool:
+      VmImage: ubuntu-latest
+    steps:
+    
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '17.09.0-ce'
+    - task: YarnInstaller@3
+      inputs:
+        versionSpec: '1.22.19'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo 'Running yarn build command'
+          nvm install 16.15.0
+          yarn run build
+      
+  - job: PrettierCheck
+    displayName: PrettierCheck
+    pool:
+      VmImage: ubuntu-latest
+    steps:
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '17.09.0-ce'
+    - task: YarnInstaller@3
+      inputs:
+        versionSpec: '1.22.19'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo 'Running yarn prettier-check command'
+          yarn run prettier-check
+  
+  - job: Linting
+    displayName: Linting
+    pool:
+      VmImage: ubuntu-latest
+    steps:
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '17.09.0-ce'
+    - task: YarnInstaller@3
+      inputs:
+        versionSpec: '1.22.19'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo 'Running yarn lint command'
+          yarn run lint
+      
+  - job: Testing
+    displayName: Testing
+    pool:
+      VmImage: ubuntu-latest
+    steps:
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '17.09.0-ce'
+    - task: YarnInstaller@3
+      inputs:
+        versionSpec: '1.22.19'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo 'Running yarn test command'
+          yarn run test
+      continueOnError: yes
