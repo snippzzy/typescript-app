@@ -46,7 +46,7 @@ jobs:
             yarn install
             yarn run test
 
-  Build-docker-artifact:
+  Build-artifact:
     docker:
       - image: cimg/node:18.3.0
     steps:
@@ -64,6 +64,6 @@ workflows:
       - Prettier-Check
       - Linting
       - Testing
-      - Build-artifact 
-        #  requires: [ Testing, Linting, Prettier-Check, Compilation ]
+      - Build-artifact: 
+          requires: [ Testing, Linting, Prettier-Check, Compilation ]
 
